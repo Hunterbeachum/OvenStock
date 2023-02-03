@@ -1,0 +1,9 @@
+# python stuff
+__pycache__/
+build/
+.env
+env/
+
+# flask
+instance/
+/webassets-cache
