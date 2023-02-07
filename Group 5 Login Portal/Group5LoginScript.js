@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////
 //      File Name: Group5LoginScript.js
-//		Date Created: February 2nd, 2023*
-//		Author: Caleb Agosta, with help from group members
+//	Date Created: February 2nd, 2023*
+//	Author: Caleb Agosta, with help from group members
 //////////////////////////////////////////////////////////////////////
 
 
