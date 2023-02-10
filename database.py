@@ -47,14 +47,3 @@ def query_db(selection, query, args=()):
     cur.close()
 
     return result
-
-
-def query_users_db(query, args=()):
-    conn = get_users_db()
-    cur = conn.cursor().execute(query, args)
-    result = cur.fetchall()
-
-    conn.commit()
-    cur.close()
-
-    return result
