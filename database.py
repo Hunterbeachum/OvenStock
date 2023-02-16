@@ -47,3 +47,15 @@ def query_db(selection, query, args=()):
     cur.close()
 
     return result
+
+
+def verify_password(username, password):
+    _conn = sqlite3.connect("database/users.db")
+    _c = _conn.cursor()
+
+    _c.execute("SELECT password FROM users WHERE username = '" + username + "';")
+    result = _c.fetchone()[0] == password
+
+    _conn.close()
+
+    return result
