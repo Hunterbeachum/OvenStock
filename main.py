@@ -23,31 +23,46 @@ for row in database.query_db("database/inventory.db", "pragma table_info('produc
 app = Flask(__name__)
 app.config.from_object('config')
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def home():
-    return render_template("Group5HomePage.html")
+    return render_template("index.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        id_submitted = request.form.get('UserId').upper()
-        if (id_submitted in list_users()) and verify_password():
+        id_submitted = request.form.get('id').upper()
+        if (id_submitted in list_users()) and verify_password(id_submitted, request.form.get('pw')):
             session['current_user'] = id_submitted
-    return render_template("Group5LoginPage.html")
+    return redirect("/")
 
 
 @app.route("/password_reset", methods=["GET", "POST"])
 def password_reset():
-    session['current_user'] = "ADMIN"
-    if session.get("current_user", None) == "ADMIN":
-        user_list = list_users()
+    if request.method == "POST":
+        id_submitted = request.form.get('id').upper()
+        if (id_submitted in list_users()) and verify_password(id_submitted, request.form.get('old_pw')):
+            database.query_db("database/users.db", f"UPDATE users SET password = '{request.form.get('new_pw')}' WHERE username = '{id_submitted}'")
     return render_template("ResetPageGroup5.html")
 
 
 @app.route("/inventory", methods=["GET", "POST"])
 def inventory():
+    if 'inventory' not in g:
+        g.inventory = list_inventory()
     return render_template("Group5InventoryPage.html")
+
+
+@app.route("/analytics", methods=["GET", "POST"])
+def analytics():
+    return render_template("Group5AnalyticsPage.html")
+
+
+@app.route("/logout", methods=["GET", "POST"])
+def logout():
+    session.pop("current_user", None)
+    return redirect("/")
+
 
 @app.errorhandler(401)
 def error_401(error):

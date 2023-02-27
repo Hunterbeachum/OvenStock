@@ -36,6 +36,16 @@ def list_users():
     conn.close()
     return result
 
+
+def list_inventory():
+    conn = sqlite3.connect("database/inventory.db")
+    c = conn.cursor()
+    c.execute("SELECT * FROM product;")
+    result = [n for n in c.fetchall()]
+    conn.close()
+    return result
+
+
 # executes a sql statement and returns the output
 # from https://flask.palletsprojects.com/en/2.2.x/patterns/sqlite3/
 def query_db(selection, query, args=()):
