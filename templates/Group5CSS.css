@@ -1,0 +1,27 @@
+body {
+			background-color: #DDD0C8;
+}
+h1 {
+			color: #5A5A5A;
+			font-family: serif;
+}
+label {
+			color: #5A5A5A;
+}
+input {
+			margin-left: 3px;
+			justify-content: space-evenly;
+			
+}
+button {
+			font-size: 20px;
+			border: 1px solid #5A5A5A;
+			background-color: #FFFFFF;
+			padding: 3px;
+}
+a {
+			font-size: 20px;
+			border: 2px solid #5A5A5A;
+			background-color: #FFFFFF;
+			padding: 3px;
+}
