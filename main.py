@@ -6,7 +6,6 @@ from flask import *
 database.init_db("database/inventory.db")
 database.init_db("database/users.db")
 
-database.query_db("database/inventory.db", "INSERT INTO product (name, vendor, quantity) VALUES (?, ?, ?), (?, ?, ?);", ['Baguette', 'Panera Bread', 5, 'Kaiser Roll', 'West Side Bakery', 3])
 database.query_db("database/users.db", "INSERT INTO users (username, password) VALUES (?, ?), (?, ?);", ['HBEACHUM', '1111', 'TEST_USER_2', 'password'])
 
 
