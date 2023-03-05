@@ -1,37 +1,36 @@
 <!DOCTYPE html>
 <html lang="eng">
     <link rel="stylesheet" type="text/css" href="Group5CSS.css">
-	<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/Group5CSS.css') }}">
 	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 
-	<title>Bakery Inventory System</title>
+	<title>Bakery Inventory Login</title>
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="/">Bakery Inventory System</a>
 			</div>
 
-			{% if session.get("current_user", None) != None %}
 			<div class="collapse navbar-collapse" id="myNavbar">
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url_for('inventory') }}">Inventory</a></li>
-                    <p></p>
+				{% if session.get("current_user", None) != None %}
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url_for('inventory') }}">Inventory</a></li>
 					<li><a href="{{ url_for('analytics') }}">Analytics</a></li>
-                    <p></p>
                     <li><a href="{{ url_for('password_reset') }}">Reset Password</a></li>
-					{% endif %}
 				</ul>
+                {% endif %}
 
 				<ul class="nav navbar-nav navbar-right">
 					{% if session.get("current_user", None) == None %}
 					<form action="/login" method="post" class="navbar-form navbar-right">
 						<div class="form-group">
-							<input type="text" name="id" placeholder="User Name" class="form-control">
+                            <label for="user"></label><input type="text" name="id" id = "user" placeholder="User Name" class="form-control" required>
 						</div>
 						<div class="form-group">
-							<input type="password" name="pw" placeholder="Password" class="form-control">
+							<label for="pass"></label><input type="password" name="pw" id = "pass" placeholder="Password" class="form-control">
 						</div>
 						<button type="submit" class="btn btn-success">Log In</button>
 					</form>
@@ -69,10 +68,9 @@
         <hr>
             Developed by <a title="Github Link" href='https://github.com/Hunterbeachum/bakery-inventory'>CSC 289 Group 5 </a>
             <p></p>
-            <p href="http://flask.pocoo.org/">
+            <link href="https://flask.pocoo.org/">
                 <img src="flask-powered.png" alt="Flask Powered" width="250"
-                                height="150" style="border:0;display:flex;" align="right" title="Flask powered">
-            </p>
+                                height="150" style="border:0;display:flex;" title="Flask powered">
     </div>
 
 
