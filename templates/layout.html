@@ -50,6 +50,7 @@
         {% for category, message in messages %}
             <div class="alert alert-{{ category }}" id="message_overlay">
                 {{ message }}
+                <button onclick="closeOverlay()">Close Alerts</button>
             </div>
         {% endfor %}
     {% endif %}
