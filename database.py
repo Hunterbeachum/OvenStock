@@ -1,6 +1,7 @@
 import sqlite3
 import hashlib
 
+
 # TODO turn selections into constants for clarity when referenced in other files
 # users_db_file = "database/users.db"
 # inventory_db_file = "database/inventory.db"
