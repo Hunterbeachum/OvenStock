@@ -3,6 +3,12 @@
 {% block body %}
     {{ super() }}
 
+{% for row in g.inventory: %}
+    {% if row[3] == 0: %}
+    <button class="openbtn" onclick="openOverlay()">Inventory Alert: {{ row[1] }}</button>
+    {% endif %}
+{% endfor %}
+
 <table>
             <tr>
                 <th>ID</th>
