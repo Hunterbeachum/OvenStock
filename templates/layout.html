@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/Group5CSS.css') }}">
 	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/bakeryJS.js') }}"></script>
 
 	<title>Bakery Inventory Login</title>
 	<nav class="navbar navbar-inverse">
@@ -47,8 +48,9 @@
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
         {% for category, message in messages %}
-            <div class="alert alert-{{ category }}">
+            <div class="alert alert-{{ category }}" id="message_overlay">
                 {{ message }}
+                <button onclick="closeOverlay()">Close Alerts</button>
             </div>
         {% endfor %}
     {% endif %}
@@ -70,7 +72,7 @@
             <p></p>
             <link href="https://flask.pocoo.org/">
                 <img src="flask-powered.png" alt="Flask Powered" width="250"
-                                height="150" style="border:0;display:flex;" title="Flask powered">
+                                height="150" style="border:0;display:inline-flex;float:right;" title="Flask powered">
     </div>
 
 

@@ -9,6 +9,8 @@ database.init_db("database/users.db")
 database.query_db("database/users.db", "INSERT INTO users (username, password) VALUES (?, ?), (?, ?);", ['HBEACHUM', '1111', 'TEST_USER_2', 'password'])
 
 update_product('Kaiser Rolls', 20)
+database.query_db("database/users.db", "INSERT INTO users (username, password) VALUES (?, ?), (?, ?);",
+                  ['HBEACHUM', '1111', 'TEST_USER_2', 'password'])
 
 # example of iterating each item from a query
 for product in database.query_db("database/inventory.db", "SELECT * FROM product;"):
@@ -25,6 +27,12 @@ for row in database.query_db("database/inventory.db", "pragma table_info('produc
 
 app = Flask(__name__)
 app.config.from_object('config')
+
+# searching for all out-of-stock inventory
+empty_items = []
+for product in database.query_db("database/inventory.db", "SELECT * FROM product WHERE amount = 0;"):
+    empty_items.append(product)
+
 
 @app.route("/")
 def home():
@@ -45,7 +53,8 @@ def password_reset():
     if request.method == "POST":
         id_submitted = request.form.get('id').upper()
         if (id_submitted in list_users()) and verify_password(id_submitted, request.form.get('old_pw')):
-            database.query_db("database/users.db", f"UPDATE users SET password = '{request.form.get('new_pw')}' WHERE username = '{id_submitted}'")
+            database.query_db("database/users.db",
+                              f"UPDATE users SET password = '{request.form.get('new_pw')}' WHERE username = '{id_submitted}'")
     return render_template("ResetPageGroup5.html")
 
 
@@ -71,17 +80,21 @@ def logout():
 def error_401(error):
     return render_template("error.html"), 401
 
+
 @app.errorhandler(403)
 def error_403(error):
     return render_template("error.html"), 403
+
 
 @app.errorhandler(404)
 def error_404(error):
     return render_template("error.html"), 404
 
+
 @app.errorhandler(405)
 def error_405(error):
     return render_template("error.html"), 405
+
 
 @app.errorhandler(413)
 def error_413(error):
