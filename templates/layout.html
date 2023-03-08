@@ -13,7 +13,7 @@
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="/">Bakery Inventory System</a>
-                <button onclick=openOverlay()>Overlay</button>
+                <button onclick=openOverlay()>See Out of Stock</button>
 			</div>
 
 			<div class="collapse navbar-collapse" id="myNavbar">
@@ -49,9 +49,9 @@
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
         {% for category, message in messages %}
-            <div class="alert alert-{{ category }}" id="message_overlay">
+            <div style="opacity:0;" class="alert alert-{{ category }}" id="message_overlay">
                 {{ message }}
-                <button onclick="closeOverlay()">Close Alerts</button>
+                <button id="hideOver" style="opacity:0;" onclick="closeOverlay()">Close Alerts</button>
             </div>
         {% endfor %}
     {% endif %}
