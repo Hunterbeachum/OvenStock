@@ -6,12 +6,18 @@ from flask import *
 database.init_db("database/inventory.db")
 database.init_db("database/users.db")
 
+database.query_db("database/users.db", "INSERT INTO users (username, password) VALUES (?, ?), (?, ?);", ['HBEACHUM', '1111', 'TEST_USER_2', 'password'])
+
+update_product('Kaiser Rolls', 20)
 database.query_db("database/users.db", "INSERT INTO users (username, password) VALUES (?, ?), (?, ?);",
                   ['HBEACHUM', '1111', 'TEST_USER_2', 'password'])
 
 # example of iterating each item from a query
 for product in database.query_db("database/inventory.db", "SELECT * FROM product;"):
     print(f"{product['vendor']}\'s {product['name']}: {product['quantity']}")
+
+for log in database.query_db("database/inventory.db", "SELECT * FROM update_history;"):
+    print(f"{log['id']} {log['date_changed']}, {log['prev']} {log['changed']}")
 
 # you can iterate each row as well
 for row in database.query_db("database/inventory.db", "pragma table_info('product')"):
