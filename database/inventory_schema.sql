@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS product;
+DROP TABLE IF EXISTS update_history;
 
 CREATE TABLE product (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -8,6 +9,12 @@ CREATE TABLE product (
 );
 
 
+CREATE TABLE update_history (
+    id INTEGER REFERENCES product(id),
+    date_changed DATE,
+    prev INTEGER,
+    changed INTEGER
+);
 
 INSERT INTO product (name, vendor, quantity) VALUES 
     ('Kaiser Rolls', 'Pabera Bread', 40),
