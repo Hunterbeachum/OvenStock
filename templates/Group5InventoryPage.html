@@ -21,8 +21,27 @@
                 {% for item in row %}
                 <td>{{ item }}</td>
                 {% endfor %}
+                {% if session.get("current_user", None) == 'ADMIN' %}
+                    <form action="/inventory/delete_{{row[0]}}" method="get" class="navbar-form navbar-right">
+                        <td><button type="submit" class="btn btn-success">Delete Item</button></td>
+                    </form>
+                {% endif %}
             </tr>
             {% endfor %}
 </table>
+
+{% if session.get("current_user", None) == 'ADMIN' %}
+    <form action="/inventory" method="post" class="navbar-form navbar-right">
+        <div class="form-group">
+            <input type="text" name="name" placeholder="Name" class="form-control">
+            <input type="text" name="vendor" placeholder="Vendor" class="form-control">
+            <input type="text" name="quantity" placeholder="Quantity" class="form-control">
+        <button type="submit" class="btn btn-success">Add Item</button>
+    </form>
+
+    <form action="/inventory/transaction_example_0" method="get" class="navbar-form navbar-right">
+        <td><button type="submit" class="btn btn-success">Generate Random Transaction</button></td>
+    </form>
+{% endif %}
 
 {% endblock %}

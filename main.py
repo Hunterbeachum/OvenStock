@@ -1,3 +1,5 @@
+
+import random
 import database
 from database import *
 from flask import *
@@ -10,7 +12,7 @@ database.query_db("database/users.db", "INSERT INTO users (username, password) V
 
 update_product('Kaiser Rolls', 20)
 database.query_db("database/users.db", "INSERT INTO users (username, password) VALUES (?, ?), (?, ?);",
-                  ['HBEACHUM', '1111', 'TEST_USER_2', 'password'])
+                  ['HBEACHUM', '1111', 'ADMIN', 'password'])
 
 # example of iterating each item from a query
 for product in database.query_db("database/inventory.db", "SELECT * FROM product;"):
@@ -30,7 +32,7 @@ app.config.from_object('config')
 
 # searching for all out-of-stock inventory
 empty_items = []
-for product in database.query_db("database/inventory.db", "SELECT * FROM product WHERE amount = 0;"):
+for product in database.query_db("database/inventory.db", "SELECT * FROM product WHERE quantity = 0;"):
     empty_items.append(product)
 
 
@@ -62,7 +64,31 @@ def password_reset():
 def inventory():
     if 'inventory' not in g:
         g.inventory = list_inventory()
+    if request.method == "POST":
+        inventory_addition = [request.form.get('name'), request.form.get('vendor'), request.form.get('quantity')]
+        if None not in inventory_addition:
+            database.query_db("database/inventory.db",
+                              "INSERT INTO product (name, vendor, quantity) VALUES (?, ?, ?);", inventory_addition)
+            return redirect(url_for('inventory'))
     return render_template("Group5InventoryPage.html")
+
+
+@app.route("/inventory/delete_<item_id>", methods = ["GET"])
+def delete_item(item_id):
+    if session.get("current_user", None) == 'ADMIN':
+        database.query_db("database/inventory.db", f"DELETE FROM product WHERE id='{item_id}'")
+    return redirect(url_for('inventory'))
+
+
+@app.route("/inventory/transaction_<item_id>_<quantity>", methods = ["GET"])
+def transaction(item_id, quantity):
+    if session.get("current_user", None) == 'ADMIN':
+        if item_id == 'example':
+            id_list = [n[0] for n in list_inventory()]
+            item_id = random.choice(id_list)
+            quantity = random.randint(0, 4)
+        database.query_db("database/inventory.db", f"UPDATE product SET quantity='{quantity}' WHERE id='{item_id}'")
+    return redirect(url_for('inventory'))
 
 
 @app.route("/analytics", methods=["GET", "POST"])
