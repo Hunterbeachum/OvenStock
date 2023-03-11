@@ -51,7 +51,7 @@
         {% for category, message in messages %}
             <div style="opacity:0;" class="alert alert-{{ category }}" id="message_overlay">
 				{{ message }}
-                <button id="hideOver" style="opacity:0;" onclick="closeOverlay()">Close Alerts</button>
+                <button id="hideOver" style="opacity:0;background-color:red;" onclick="closeOverlay()">Close Alerts</button>
             </div>
         {% endfor %}
     {% endif %}

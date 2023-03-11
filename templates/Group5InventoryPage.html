@@ -2,15 +2,19 @@
 {% block page_title %}Bakery Inventory System{% endblock %}
 {% block body %}
     {{ super() }}
+    <link rel="stylesheet" type="text/css" href="Group5CSS.css">
 
-{% for row in g.inventory: %}
-    {% if row[3] == 0: %}
-    <button class="openbtn" onclick="openOverlay()">Inventory Alert: {{ row[1] }}</button>
-    {% endif %}
-{% endfor %}
+<div style="opacity:0;" class="alert alert-{{ category }}" id="message_overlay">
+	{% for row in g.inventory: %}
+        {% if row[3] == 0: %}
+            <button class="openbtn" onclick="openOverlay()">Inventory Alert: {{ row[1] }}</button>
+        {% endif %}
+    {% endfor %}
+    <button id="hideOver" style="opacity:0;background-color:red;color:white;" onclick="closeOverlay()">Close Alerts</button>
+</div>
 
-<table>
-            <tr>
+<table style="margin:0">
+            <tr style="float:inherit;">
                 <th>ID</th>
                 <th>Name</th>
                 <th>Vendor</th>
