@@ -38,20 +38,7 @@
 					</form>
 					{% else %}
 					<li><a><b>Logged in as: {{ session.get("current_user") }}</b></a></li>
-		<table>
-			<tr style="background-color: white;">
-				<th>| Order-able</th><th>| Amount to order</th><th>| Item Name</th><th>| Item Cost</th><th>| Item Amount |</th>
-			</tr>
-			<tr>
-				<td><input type="checkbox" id="item 1"/></td>
-				<td><input style="object-fit: contain;" type="text" id="amountItem1"/></td>
-				<td> Flour</td>
-				<td>20¢ per oz</td>
-				<td>240 Pounds</td>
-			</tr>
-			<tr></tr>
-		</table>
-					<li><a href="{{ url_for('logout') }}"><b><u>Logout</u></b></a></li>
+        			<li><a href="{{ url_for('logout') }}"><b><u>Logout</u></b></a></li>
 					{% endif %}
 				</ul>
 			</div>
@@ -63,7 +50,7 @@
     {% if messages %}
         {% for category, message in messages %}
             <div style="opacity:0;" class="alert alert-{{ category }}" id="message_overlay">
-                {{ message }}
+				{{ message }}
                 <button id="hideOver" style="opacity:0;" onclick="closeOverlay()">Close Alerts</button>
             </div>
         {% endfor %}
