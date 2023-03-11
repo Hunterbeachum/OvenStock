@@ -13,6 +13,7 @@
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="/">Bakery Inventory System</a>
+                <button onclick=openOverlay()>See Out of Stock</button>
 			</div>
 
 			<div class="collapse navbar-collapse" id="myNavbar">
@@ -37,6 +38,19 @@
 					</form>
 					{% else %}
 					<li><a><b>Logged in as: {{ session.get("current_user") }}</b></a></li>
+                        <table>
+                            <tr style="background-color: white;">
+                                <th>| Order-able</th><th>| Amount to order</th><th>| Item Name</th><th>| Item Cost</th><th>| Item Amount |</th>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" id="item 1"/></td>
+                                <td><input style="object-fit: contain;" type="text" id="amountItem1"/></td>
+                                <td> Flour</td>
+                                <td>20¢ per oz</td>
+                                <td>240 Pounds</td>
+                            </tr>
+                            <tr></tr>
+                        </table>
 					<li><a href="{{ url_for('logout') }}"><b><u>Logout</u></b></a></li>
 					{% endif %}
 				</ul>
@@ -48,9 +62,9 @@
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
         {% for category, message in messages %}
-            <div class="alert alert-{{ category }}" id="message_overlay">
+            <div style="opacity:0;" class="alert alert-{{ category }}" id="message_overlay">
                 {{ message }}
-                <button onclick="closeOverlay()">Close Alerts</button>
+                <button id="hideOver" style="opacity:0;" onclick="closeOverlay()">Close Alerts</button>
             </div>
         {% endfor %}
     {% endif %}
@@ -74,6 +88,7 @@
                 <img src="flask-powered.png" alt="Flask Powered" width="250"
                                 height="150" style="border:0;display:inline-flex;float:right;" title="Flask powered">
     </div>
+    <script src="/static/js/bakeryJS.js"></script>
 
 
 </html>
