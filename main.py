@@ -1,4 +1,4 @@
-
+import datetime
 import random
 import database
 from database import *
@@ -83,17 +83,23 @@ def delete_item(item_id):
 @app.route("/inventory/transaction_<item_id>_<quantity>", methods = ["GET"])
 def transaction(item_id, quantity):
     if session.get("current_user", None) == 'ADMIN':
+        inventory = list_inventory()
+        id_list = [n[0] for n in list_inventory()]
         if item_id == 'example':
-            id_list = [n[0] for n in list_inventory()]
             item_id = random.choice(id_list)
             quantity = random.randint(0, 4)
+        prev = inventory[id_list.index(item_id)][3]
         database.query_db("database/inventory.db", f"UPDATE product SET quantity='{quantity}' WHERE id='{item_id}'")
+        database.query_db("database/inventory.db", f"INSERT INTO update_history (id, date_changed, prev, changed) VALUES (?, ?, ?, ?);",
+                          [item_id, datetime.datetime.now(), prev, quantity])
     return redirect(url_for('inventory'))
 
 
 @app.route("/analytics", methods=["GET", "POST"])
 def analytics():
-    return render_template("Group5AnalyticsPage.html")
+    if 'analytics' not in g:
+        g.analytics = list_analytics()
+    return render_template("analytics.html")
 
 
 @app.route("/logout", methods=["GET", "POST"])

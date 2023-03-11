@@ -60,6 +60,14 @@ def list_inventory():
     conn.close()
     return result
 
+def list_analytics():
+    conn = sqlite3.connect("database/inventory.db")
+    c = conn.cursor()
+    c.execute("SELECT a.id, b.name, a.date_changed, a.prev, a.changed FROM update_history a, product b WHERE a.id = b.id;")
+    result = [n for n in c.fetchall()]
+    conn.close()
+    return result
+
 
 # executes a sql statement and returns the output
 # from https://flask.palletsprojects.com/en/2.2.x/patterns/sqlite3/

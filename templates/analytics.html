@@ -1,6 +1,25 @@
-<!DOCTYPE html>
-<html lang="eng">
-    <link rel="stylesheet" type="text/css" href="Group5CSS.css">
-	<meta charset="utf-8">
-    <title>Bakery Analytics Page</title>
-</html>
+{% extends "layout.html" %}
+{% block page_title %}Bakery Inventory System{% endblock %}
+{% block body %}
+    {{ super() }}
+
+{% if session.get("current_user", None) == 'ADMIN' %}
+<table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Transaction Date</th>
+                <th>Previous Value</th>
+                <th>New Value</th>
+            </tr>
+            {% for row in g.analytics: %}
+            <tr>
+                {% for item in row %}
+                <td>{{ item }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+</table>
+
+{% endif %}
+{% endblock %}
