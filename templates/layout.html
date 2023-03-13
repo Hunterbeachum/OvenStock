@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="eng">
-    <link rel="stylesheet" type="text/css" href="Group5CSS.css">
+    <link rel="stylesheet" type="text/css" href="static/css/Group5CSS.css">
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/Group5CSS.css') }}">
@@ -12,8 +12,8 @@
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="/">Bakery Inventory System</a>
-                <button onclick=openOverlay()>See Out of Stock</button>
+				<a class="navbar-brand" href="/" style="background-image:url('https://en.wikipedia.org/wiki/Kitchen_utensil#/media/File:Batterie_de_cuisine.jpg');">Bakery Inventory System</a>
+
 			</div>
 
 			<div class="collapse navbar-collapse" id="myNavbar">
@@ -61,6 +61,7 @@
     <div class="container">
 
         <h1>{% block page_title %}{% endblock %}</h1>
+		<img alt="Shelfing underneath the heading" src="static/css/04_organization_tips_keep_pots_pans_pretty_therry.jpg" style="position: relative;"></img>
 
         <p>{% block body %}{% endblock %}</p>
 
@@ -72,7 +73,7 @@
             Developed by <a title="Github Link" href='https://github.com/Hunterbeachum/bakery-inventory'>CSC 289 Group 5 </a>
             <p></p>
             <link href="https://flask.pocoo.org/">
-                <img src="flask-powered.png" alt="Flask Powered" width="250"
+                <img src="static/css/flask-powered.png" alt="Flask Powered" width="250"
                                 height="150" style="border:0;display:inline-flex;float:right;" title="Flask powered">
     </div>
     <script src="/static/js/bakeryJS.js"></script>

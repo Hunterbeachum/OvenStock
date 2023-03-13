@@ -4,13 +4,13 @@
     {{ super() }}
     <link rel="stylesheet" type="text/css" href="Group5CSS.css">
 
-<div style="opacity:0;" class="alert alert-{{ category }}" id="message_overlay">
+<div style="opacity:0;height:0" class="alert alert-{{ category }}" id="message_overlay">
 	{% for row in g.inventory: %}
         {% if row[3] == 0: %}
             <button class="openbtn" onclick="openOverlay()">Inventory Alert: {{ row[1] }}</button>
         {% endif %}
     {% endfor %}
-    <button id="hideOver" style="opacity:0;background-color:red;color:white;" onclick="closeOverlay()">Close Alerts</button>
+
 </div>
 
 <table style="margin:0">
@@ -33,18 +33,20 @@
             </tr>
             {% endfor %}
 </table>
-
+<button id="showOver" style="opacity:100%;background-color:white;" onclick="openOverlay()">See Out of Stock</button>
+<button id="hideOver" style="opacity:0%;background-color:red;color:white;" onclick="closeOverlay()">Close Alerts</button>
 {% if session.get("current_user", None) == 'ADMIN' %}
     <form action="/inventory" method="post" class="navbar-form navbar-right">
         <div class="form-group">
-            <input type="text" name="name" placeholder="Name" class="form-control">
+            <input type="text" name="name" placeholder="Name" class="form-control" required>
             <input type="text" name="vendor" placeholder="Vendor" class="form-control">
             <input type="text" name="quantity" placeholder="Quantity" class="form-control">
-        <button type="submit" class="btn btn-success">Add Item</button>
+            <button type="submit" class="btn btn-success">Add Item</button>
+        </div>
     </form>
 
     <form action="/inventory/transaction_example_0" method="get" class="navbar-form navbar-right">
-        <td><button type="submit" class="btn btn-success">Generate Random Transaction</button></td>
+        <button type="submit" class="btn btn-success">Generate Random Transaction</button>
     </form>
 {% endif %}
 

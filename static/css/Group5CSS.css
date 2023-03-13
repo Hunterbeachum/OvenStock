@@ -1,5 +1,6 @@
 body {
 			background-color: #DDD0C8;
+
 }
 h1 {
 			color: #5A5A5A;
@@ -21,5 +22,11 @@ button {
 a {
   			font-size: 20px;
  			padding: 3px;
+}
+tr:nth-child(even) {
+			background-color: #C8DDDA;
+}
+tr:nth-child(odd) {
+			background-color: #C8CBDD;
 }
 
