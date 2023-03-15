@@ -4,13 +4,15 @@
 {% block body %}
     {{ super() }}
 <html>
-    <link rel="stylesheet" type="text/css" href="Group5CSS.css" />
+
     <title>Introduction To Our System</title>
     <body>
         <p>Welcome to the Bakery Inventory Management System.  If you are logged in, you can view and manage the inventory.</p>
         <p>This is a web app developed with the use of a Flask framework. </p>
         <a href="http://flask.pocoo.org/" style="background-color:#DDD0C8;border-width:0;">
                 <img src="flask-powered.png" alt="Flask Powered"></a>
+        <a src="{{ url_for('static', filename='css/flask-powered.png') }}" alt="Flask Powered"
+           height="150" style="border:0;display:inline-flex;float:right;" title="Flask powered"></a>
     </body>
 </html>
 
