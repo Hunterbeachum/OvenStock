@@ -52,11 +52,11 @@ def login():
             # else below should display "invalid password for username received" to the <p> element with ID ('login-message')
             else:
                 login_error = "Invalid password for given username."
-                flash(login_error)
+                flash(login_error, 'error')
         # elif below should display "invalid username" to the <p> element with the ID ('login-message')
         elif id_submitted not in list_users():
             login_error = "Username not found, try creating an account?"
-            flash(login_error)
+            flash(login_error, 'error')
 
     return redirect("/")
 
