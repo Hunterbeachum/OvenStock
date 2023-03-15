@@ -34,6 +34,8 @@
 							<label for="pass"></label><input type="password" name="pw" id = "pass" placeholder="Password" class="form-control">
 						</div>
 						<button type="submit" class="btn btn-success">Log In</button>
+						<!--- this <p> element is going to display information to the user if they input wrong login credentials--->
+						<div id="login-message" class="flash" style="font-weight:bold;color:red;">{{ login_error }}</div>
 					</form>
 					{% else %}
 					<li><a><b>Logged in as: {{ session.get("current_user") }}</b></a></li>

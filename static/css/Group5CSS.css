@@ -29,4 +29,7 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
 			background-color: #C8CBDD;
 }
-
+.flash {
+			color: red;
+			font-weight: bold;
+}

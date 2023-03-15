@@ -45,8 +45,19 @@ def home():
 def login():
     if request.method == "POST":
         id_submitted = request.form.get('id').upper()
-        if (id_submitted in list_users()) and verify_password(id_submitted, request.form.get('pw')):
-            session['current_user'] = id_submitted
+        # creating nested if statements to allow invalid password catching
+        if id_submitted in list_users():
+            if verify_password(id_submitted, request.form.get('pw')):
+                session['current_user'] = id_submitted
+            # else below should display "invalid password for username received" to the <p> element with ID ('login-message')
+            else:
+                login_error = "Invalid password for given username."
+                flash(login_error)
+        # elif below should display "invalid username" to the <p> element with the ID ('login-message')
+        elif id_submitted not in list_users():
+            login_error = "Username not found, try creating an account?"
+            flash(login_error)
+
     return redirect("/")
 
 
