@@ -8,7 +8,8 @@ from flask import *
 database.init_db("database/inventory.db")
 database.init_db("database/users.db")
 
-database.query_db("database/users.db", "INSERT INTO users (username, password) VALUES (?, ?), (?, ?);", ['HBEACHUM', '1111', 'TEST_USER_2', 'password'])
+database.query_db("database/users.db", "INSERT INTO users (username, password) VALUES (?, ?), (?, ?);",
+                  ['HBEACHUM', '1111', 'TEST_USER_2', 'password'])
 
 update_product('Kaiser Rolls', 20)
 database.query_db("database/users.db", "INSERT INTO users (username, password) VALUES (?, ?), (?, ?);",
@@ -61,10 +62,26 @@ def login():
     return redirect("/")
 
 
+@app.route("/add_user", methods=["GET", "POST"])
+def add_user():
+    if request.method == "POST":
+        new_user = request.form.get('new-user')
+        if new_user in list_users():
+            user_error = "Username is already in database."
+            flash(user_error, 'error')
+        else:
+            new_pass = request.form.get('new-pass')
+            new_email = request.form.get('new-email')
+            # Add username, password, and email to database
+            database.query_db("database/users.db", f"INSERT INTO users (username, password) VALUES(?, ?)",
+                              [new_user, new_pass])
+    return render_template("AddUserGroup5.html")
+
+
 @app.route("/password_reset", methods=["GET", "POST"])
 def password_reset():
     if request.method == "POST":
-        id_submitted = request.form.get('id').upper()
+        id_submitted = request.form.get('user').upper()
         if (id_submitted in list_users()) and verify_password(id_submitted, request.form.get('old_pw')):
             database.query_db("database/users.db",
                               f"UPDATE users SET password = '{request.form.get('new_pw')}' WHERE username = '{id_submitted}'")
@@ -84,14 +101,14 @@ def inventory():
     return render_template("Group5InventoryPage.html")
 
 
-@app.route("/inventory/delete_<item_id>", methods = ["GET"])
+@app.route("/inventory/delete_<item_id>", methods=["GET"])
 def delete_item(item_id):
     if session.get("current_user", None) == 'ADMIN':
         database.query_db("database/inventory.db", f"DELETE FROM product WHERE id='{item_id}'")
     return redirect(url_for('inventory'))
 
 
-@app.route("/inventory/transaction_<item_id>_<quantity>", methods = ["GET"])
+@app.route("/inventory/transaction_<item_id>_<quantity>", methods=["GET"])
 def transaction(item_id, quantity):
     if session.get("current_user", None) == 'ADMIN':
         inventory = list_inventory()
@@ -101,7 +118,8 @@ def transaction(item_id, quantity):
             quantity = random.randint(0, 4)
         prev = inventory[id_list.index(item_id)][3]
         database.query_db("database/inventory.db", f"UPDATE product SET quantity='{quantity}' WHERE id='{item_id}'")
-        database.query_db("database/inventory.db", f"INSERT INTO update_history (id, date_changed, prev, changed) VALUES (?, ?, ?, ?);",
+        database.query_db("database/inventory.db",
+                          f"INSERT INTO update_history (id, date_changed, prev, changed) VALUES (?, ?, ?, ?);",
                           [item_id, datetime.datetime.now(), prev, quantity])
     return redirect(url_for('inventory'))
 

@@ -33,3 +33,6 @@ tr:nth-child(odd) {
 			color: red;
 			font-weight: bold;
 }
+header {
+			color: #5A5A5A;
+}

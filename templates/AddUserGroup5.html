@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block page_title %}Bakery Inventory System{% endblock %}
+{% block body %}
+    {{ super() }}
+
+<form action="/add_user" method="post" class="navbar-form create-user">
+	<div class="form-group">
+		<label for="new-user"></label><input type="text" name="new-user" id="new-user" placeholder="New Username" class="form-control" required>
+	</div>
+	<div class="form-group">
+		<label for="new-pass"></label><input type="text" name="new-pass" id="new-pass" placeholder="Password" class="form-control" required>
+	</div>
+	<div class="form-group">
+		<label for="new-email"></label><input type="text" name="new-email" id="new-email" placeholder="Email" class="form-control" required>
+	</div>
+	<p></p>
+	<button type="submit" class="btn new-user-success">Register</button>
+</form>
+
+{% endblock %}
