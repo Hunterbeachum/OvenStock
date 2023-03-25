@@ -23,7 +23,7 @@
     {% for row in g.inventory: %}
     <tr>
         {% for item in row %}
-            <td>{{ item }}</td>
+            <td style="text-align:right;">{{ item }}</td>
         {% endfor %}
         {% if session.get("current_user", None) == 'ADMIN' %}
             <form action="/inventory/delete_{{row[0]}}" method="get" class="navbar-form navbar-right">
