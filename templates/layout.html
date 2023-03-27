@@ -27,7 +27,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					{% if session.get("current_user", None) == None %}
 					<form action="/login" method="post" class="navbar-form navbar-right">
-						<h1 style="text-underline:#000000;">Login</h1>
+						<h1 style="text-decoration: underline;">Login</h1>
 						<div class="form-group">
                             <label for="user"></label><input type="text" name="id" id = "user" placeholder="User Name" class="form-control" required>
 						</div>

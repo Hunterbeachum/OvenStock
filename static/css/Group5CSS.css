@@ -4,6 +4,14 @@ body {
 }
 h1 {
 			color: #5A5A5A;
+			font-weight: bolder;
+			font-family: courier, serif;
+}
+h2 {
+			text-decoration: underline;
+			padding-left: 30px;
+			color: #5A5A5A;
+			font-weight: bold;
 			font-family: courier, serif;
 }
 label {
