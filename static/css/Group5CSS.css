@@ -31,6 +31,22 @@ a {
   			font-size: 20px;
  			padding: 3px;
 }
+table {
+			border-collapse: collapse;
+			border-right: 1px solid black;
+			border-left: 1px solid black;
+}
+table td {
+			border-right: 1px solid black;
+			border-left: 1px solid black;
+}
+table tr {
+			border-top: 1px solid black;
+			text-align: center;
+}
+tr:last-child {
+			border-bottom: 1px solid black;
+}
 tr:nth-child(even) {
 			background-color: #C8DDDA;
 }

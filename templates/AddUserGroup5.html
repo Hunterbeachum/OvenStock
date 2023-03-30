@@ -2,19 +2,21 @@
 {% block page_title %}Bakery Inventory System{% endblock %}
 {% block body %}
     {{ super() }}
-<h2>Create User Account</h2>
 <form action="/add_user" method="post" class="navbar-form create-user">
+	<h2 style="margin-left:-25px">Create User Account</h2>
 	<div class="form-group" style="padding-left:30px;">
-		<label for="new-user"></label><input type="text" name="new-user" id="new-user" placeholder="New Username" class="form-control" required>
+		<label for="new-user"></label><input type="text" name="new-user" id="new-user" placeholder="Username" class="form-control" required>
 	</div>
+	<p></p>
 	<div class="form-group" style="padding-left:30px;">
 		<label for="new-pass"></label><input type="text" name="new-pass" id="new-pass" placeholder="Password" class="form-control" required>
 	</div>
+	<p></p>
 	<div class="form-group" style="padding-left:30px;">
 		<label for="new-email"></label><input type="text" name="new-email" id="new-email" placeholder="Email" class="form-control" required>
 	</div>
 	<p></p>
-	<button type="submit" class="btn new-user-success" style="margin-left:30px;">Register</button>
+	<button type="submit" class="btn new-user-success" style="margin-left:5px;">Register Account</button>
 </form>
 
 {% endblock %}
