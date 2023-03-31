@@ -21,15 +21,16 @@ CREATE TABLE vendor (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR2,
     phone CHAR(32),
-    address VARCHAR2
+    address VARCHAR2,
+    email VARCHAR2
 );
 
-INSERT INTO vendor (name, phone, address) VALUES
-    ('Pabera Bread','555 123-4567', '321 Street Rd. Holly Springs, NC'),
-    ('Chicago Bakery','555 234-5678', '100 Chicago Rd. Witcheta, KS'),
-    ('West Side Bakery','555 345-6789', '52 West St. Tacoma, WA'),
-    ('Tacoma Baking','555 819-1234', '8900 South Blvd. Chicago IL'),
-    ('Ricks Breakfeast Bread','555 999-9990', 'Rocky Rd. Woonsocket RI');
+INSERT INTO vendor (name, phone, address, email) VALUES
+    ('Pabera Bread','555 123-4567', '321 Street Rd. Holly Springs, NC', 'pabera@bread.com'),
+    ('Chicago Bakery','555 234-5678', '100 Chicago Rd. Witcheta, KS', 'chicago.bakery@mail.com'),
+    ('West Side Bakery','555 345-6789', '52 West St. Tacoma, WA', 'west@side.com'),
+    ('Tacoma Baking','555 819-1234', '8900 South Blvd. Chicago IL', 'contact@tacoma.com'),
+    ('Ricks Breakfeast Bread','555 999-9990', 'Rocky Rd. Woonsocket RI', 'rick@breakfeast.com');
 
 
 INSERT INTO product (name, vendor, quantity) VALUES 
