@@ -7,7 +7,7 @@
 <div style="opacity:0;height:0" class="alert alert-{{ category }}" id="message_overlay">
 	{% for row in g.inventory: %}
         {% if row[3] == 0: %}
-            <button class="openbtn" onclick="openOverlay()" style="color:red;">Out of Stock: <b>{{ row[1] }}</b></button>
+            <button style="border-radius:10px;background:red;width:auto;height:auto;color:white;" class="openbtn">Out of Stock: <b>{{ row[1] }}</b></button>
         {% endif %}
     {% endfor %}
 
@@ -15,15 +15,16 @@
 
 <table style="margin:0">
     <tr style="float:inherit;">
-        <th>ID</th>
-        <th>Name</th>
-        <th>Vendor</th>
-        <th>Quantity</th>
+        <th> ID </th>
+        <th>Name </th>
+        <th>Vendor </th>
+        <th>Quantity (per item/gram) </th>
+        <th></th>
     </tr>
     {% for row in g.inventory: %}
     <tr>
         {% for item in row %}
-            <td style="text-align:right;">{{ item }}</td>
+            <td>{{ item }}</td>
         {% endfor %}
         {% if session.get("current_user", None) == 'ADMIN' %}
             <form action="/inventory/delete_{{row[0]}}" method="get" class="navbar-form navbar-right">
@@ -33,8 +34,9 @@
     </tr>
     {% endfor %}
 </table>
-<button id="showOver" style="opacity:100%;background-color:white;" onclick="openOverlay()">See Out of Stock</button>
-<button id="hideOver" style="opacity:0%;background-color:red;color:white;" onclick="closeOverlay()">Close Alerts</button>
+<p></p>
+<button id="showOver" style="opacity:100%;background-color:white;" onclick="open_overlay()">See Out of Stock</button>
+<button id="hideOver" style="opacity:0%;background-color:red;color:white;" onclick="close_overlay()">Close Alerts</button>
 {% if session.get("current_user", None) == 'ADMIN' %}
     <form action="/inventory" method="post" class="navbar-form navbar-right">
         <div class="form-group">

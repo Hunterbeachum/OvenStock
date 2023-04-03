@@ -11,7 +11,7 @@
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="/" style="background-image:url('https://en.wikipedia.org/wiki/Kitchen_utensil#/media/File:Batterie_de_cuisine.jpg');">Bakery Inventory System</a>
+				<a class="navbar-brand" href="/">Bakery Inventory System Homepage</a>
 
 			</div>
 
@@ -27,12 +27,14 @@
 				<ul class="nav navbar-nav navbar-right">
 					{% if session.get("current_user", None) == None %}
 					<form action="/login" method="post" class="navbar-form navbar-right">
-						<h1 style="text-underline:#000000;">Login</h1>
+						<h1 style="text-decoration: underline;">Login</h1>
 						<div class="form-group">
                             <label for="user"></label><input type="text" name="id" id = "user" placeholder="User Name" class="form-control" required>
 						</div>
+						<p></p>
 						<div class="form-group">
 							<label for="pass"></label><input type="password" name="pw" id = "pass" placeholder="Password" class="form-control">
+						<p></p>
 						</div>
 
 						<a href="{{ url_for('password_reset') }}">Forgot Password?</a>
@@ -41,11 +43,12 @@
 						<button type="submit" class="btn btn-success">Log In</button>
 					</form>
 					{% else %}
-					<li><a><b>Logged in as: {{ session.get("current_user") }}</b></a></li>
-        			<li><a href="{{ url_for('logout') }}"><b><u>Logout</u></b></a></li>
+
 					{% endif %}
 				</ul>
 			</div>
+			<a><b>Logged in as: <u>{{ session.get("current_user") }}</u> - </b></a>
+   			<a href="{{ url_for('logout') }}"><b><u>Logout</u></b></a>
 
 		</div>
     </nav>
@@ -62,12 +65,9 @@
 
 
     <div class="under-h1-container">
-
         <h1>{% block page_title %}{% endblock %}</h1>
 		<img alt="Shelf underneath the heading" src="{{ url_for('static', filename='css/shelfing.jpg') }}" style="position: relative;opacity:60%"></img>
-
         <p>{% block body %}{% endblock %}</p>
-
     </div>
 
 
@@ -77,8 +77,7 @@
             <p></p>
             <a href="https://flask.palletsprojects.com/en/2.2.x/">
                 <img src="{{ url_for('static', filename='css/flask-powered.png') }}" alt="Flask Powered" width="250"
-                                height="150" style="border:0;display:inline-flex;float:right;" title="Flask powered"
-								onmouseover="">
+                                height="150" style="border:0;display:inline-flex;float:right;" title="Flask powered">
 			</a>
     </div>
     <script src="{{ url_for('static', filename='js/bakeryJS.js') }}"></script>
