@@ -1,8 +1,11 @@
 import datetime
 import random
 import database
+import base64
 from database import *
 from flask import *
+from io import BytesIO
+from matplotlib.figure import Figure
 
 # this runs the inventory_schema.sql file and resets the table and database. Ideally we should only really run this once, but for testing purposes we are doing it every time
 database.init_db("database/inventory.db")
@@ -129,6 +132,19 @@ def analytics():
     if 'analytics' not in g:
         g.analytics = list_analytics()
     return render_template("analytics.html")
+
+
+@app.route("/analytics/graph_<item_id>", methods=["GET"])
+def create_analytics_graphic(item_id):
+    if 'analytics' not in g:
+        g.analytics = list_analytics()
+    fig = Figure()
+    ax = fig.subplots()
+    ax.plot([1, 2])
+    buf = BytesIO()
+    fig.savefig(buf, format="png")
+    g.analytics_current_data = base64.b64encode(buf.getbuffer()).decode("ascii")
+    return redirect(url_for('analytics'))
 
 
 @app.route("/logout", methods=["GET", "POST"])
