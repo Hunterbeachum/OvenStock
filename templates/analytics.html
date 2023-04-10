@@ -16,10 +16,20 @@
             {% for row in g.analytics: %}
             <tr>
                 {% for item in row %}
-                <td>{{ item }}</td>
+                    {% if item == row[1] %}
+                        <td><a href="/analytics/graph_{{ row[0] }}">{{ item }}</a></td>
+                    {% else %}
+                        <td>{{ item }}</td>
+                    {% endif %}
                 {% endfor %}
             </tr>
             {% endfor %}
+
 </table>
+
+            {% if encoded != None %}
+                <img src="data:image/jpeg;base64,{{ img_data }}" alt="img_data"  id="imgslot"/>
+            {% endif %}
+
 {% endif %}
 {% endblock %}

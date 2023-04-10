@@ -4,7 +4,7 @@
     {{ super() }}
     <link rel="stylesheet" type="text/css" href="Group5CSS.css">
 
-<div style="opacity:0;height:0" class="alert alert-{{ category }}" id="message_overlay">
+<div style="opacity:0;height:8" class="alert alert-{{ category }}" id="message_overlay">
 	{% for row in g.inventory: %}
         {% if row[3] == 0: %}
             <button style="border-radius:10px;background:red;width:auto;height:auto;color:white;" class="openbtn">Out of Stock: <b>{{ row[1] }}</b></button>
@@ -15,10 +15,10 @@
 
 <table style="margin:0">
     <tr style="float:inherit;">
-        <th> ID </th>
-        <th>Name </th>
-        <th>Vendor </th>
-        <th>Quantity (per item/gram) </th>
+        <th><a href="/inventory_sort0">ID</a></th>
+        <th><a href="/inventory_sort1">Name</a></th>
+        <th><a href="/inventory_sort2">Vendor</a></th>
+        <th><a href="/inventory_sort3">Quantity (per item/gram)</a></th>
         <th></th>
     </tr>
     {% for row in g.inventory: %}

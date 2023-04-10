@@ -1,11 +1,14 @@
+import base64
 import datetime
 import random
-import database
-import base64
-from database import *
-from flask import *
 from io import BytesIO
+
+from flask import *
+from flask_mail import Mail, Message
 from matplotlib.figure import Figure
+
+import database
+from database import *
 
 # this runs the inventory_schema.sql file and resets the table and database. Ideally we should only really run this once, but for testing purposes we are doing it every time
 database.init_db("database/inventory.db")
@@ -33,6 +36,16 @@ for row in database.query_db("database/inventory.db", "pragma table_info('produc
 
 app = Flask(__name__)
 app.config.from_object('config')
+
+# mail configuration
+app.config['MAIL_SERVER']='sandbox.smtp.mailtrap.io'
+app.config['MAIL_PORT'] = 2525
+app.config['MAIL_USERNAME'] = '8b744c11e3845e'
+app.config['MAIL_PASSWORD'] = 'da329f17fc0648'
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+# app.config['MAIL_SUPPRESS_SEND'] = False
+mail = Mail(app)
 
 # searching for all out-of-stock inventory
 empty_items = []
@@ -68,7 +81,7 @@ def login():
 @app.route("/add_user", methods=["GET", "POST"])
 def add_user():
     if request.method == "POST":
-        new_user = request.form.get('new-user')
+        new_user = request.form.get('new-user').upper()
         if new_user in list_users():
             user_error = "Username is already in database."
             flash(user_error, 'error')
@@ -104,6 +117,15 @@ def inventory():
     return render_template("Group5InventoryPage.html")
 
 
+@app.route("/inventory_sort<index>", methods=["GET", "POST"])
+def sort_inventory(index):
+    g.reverse = int(index)
+    print(int(index), g.reverse)
+    g.inventory = sorted(list_inventory(), key=lambda item: item[int(index)])
+    print(g.inventory)
+    return render_template("Group5InventoryPage.html")
+
+
 @app.route("/inventory/delete_<item_id>", methods=["GET"])
 def delete_item(item_id):
     if session.get("current_user", None) == 'ADMIN':
@@ -124,6 +146,10 @@ def transaction(item_id, quantity):
         database.query_db("database/inventory.db",
                           f"INSERT INTO update_history (id, date_changed, prev, changed) VALUES (?, ?, ?, ?);",
                           [item_id, datetime.datetime.now(), prev, quantity])
+        if int(quantity) == 0:
+            msg = Message('Test Title', sender = "8b744c11e3845e", recipients = ['hsbeachum@my.waketech.edu'])
+            msg.body = "Test Body"
+            mail.send(msg)
     return redirect(url_for('inventory'))
 
 
@@ -138,13 +164,21 @@ def analytics():
 def create_analytics_graphic(item_id):
     if 'analytics' not in g:
         g.analytics = list_analytics()
-    fig = Figure()
+    fig = Figure(figsize=(5, 4))
     ax = fig.subplots()
     ax.plot([1, 2])
+    item_name = ''
+    for item in list_analytics():
+        if item[0] == int(item_id):
+            item_name = item[1]
+            break
+    ax.set_title(item_name)
+    ax.set_xlabel('date')
+    ax.set_ylabel('stock')
     buf = BytesIO()
     fig.savefig(buf, format="png")
-    g.analytics_current_data = base64.b64encode(buf.getbuffer()).decode("ascii")
-    return redirect(url_for('analytics'))
+    encoded = base64.b64encode(buf.getvalue()).decode('utf-8')
+    return render_template("analytics.html", img_data=encoded)
 
 
 @app.route("/logout", methods=["GET", "POST"])
