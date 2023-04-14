@@ -37,8 +37,8 @@ for row in database.query_db("database/inventory.db", "pragma table_info('produc
 app = Flask(__name__)
 app.config.from_object('config')
 
-# mail configuration
-app.config['MAIL_SERVER']='sandbox.smtp.mailtrap.io'
+# mail configuration (Hunter's Mailtrap)
+app.config['MAIL_SERVER'] = 'sandbox.smtp.mailtrap.io'
 app.config['MAIL_PORT'] = 2525
 app.config['MAIL_USERNAME'] = '8b744c11e3845e'
 app.config['MAIL_PASSWORD'] = 'da329f17fc0648'
@@ -74,7 +74,6 @@ def login():
         elif id_submitted not in list_users():
             login_error = "Username not found, try creating an account?"
             flash(login_error, 'error')
-
     return redirect("/")
 
 
@@ -126,6 +125,18 @@ def sort_inventory(index):
     return render_template("Group5InventoryPage.html")
 
 
+# If you show the graph for each item, then click the sort button(s), the webpage goes blank.
+# Otherwise, it works fine!
+
+# @app.route("/analytics_sort<index>", methods=["GET", "POST"])
+# def sort_analytics(index):
+#    g.reverse = int(index)
+#    print(int(index), g.reverse)
+#    g.inventory = sorted(list_analytics(), key=lambda item: item[int(index)])
+#    print(g.inventory)
+#    return render_template("analytics.html")
+
+
 @app.route("/inventory/delete_<item_id>", methods=["GET"])
 def delete_item(item_id):
     if session.get("current_user", None) == 'ADMIN':
@@ -147,8 +158,13 @@ def transaction(item_id, quantity):
                           f"INSERT INTO update_history (id, date_changed, prev, changed) VALUES (?, ?, ?, ?);",
                           [item_id, datetime.datetime.now(), prev, quantity])
         if int(quantity) == 0:
-            msg = Message('Test Title', sender = "8b744c11e3845e", recipients = ['hsbeachum@my.waketech.edu'])
-            msg.body = "Test Body"
+            msg = Message('Out of Inventory Alert', sender="8b744c11e3845e",
+                          recipients=['846d7a87ef-c51084@inbox.mailtrap.io', 'hsbeachum@my.waketech.edu'])
+            msg.html = f"<html><header style='color:black;font-weight:bold;'><b>Bakery Inventory System</b></header><p></p>" + \
+                       "<body style='background-color:#DDD0C8;color:red;'>" + \
+                       "You are out of inventory for an item with <u style='color:red'>ID = <b>" + str(
+                item_id) + "</b></u></body></html>"
+            print("Checkmark Reached!")
             mail.send(msg)
     return redirect(url_for('inventory'))
 
