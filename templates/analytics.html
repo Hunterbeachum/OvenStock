@@ -6,12 +6,12 @@
 {% if session.get("current_user", None) == 'ADMIN' %}
 <table>
             <tr>
-                <th style="padding:5px;"><a href="analytics_sort0">ID</a></th>
-                <th style="padding:5px;"><a href="analytics_sort1">Name</a></th>
-                <th style="padding:5px;"><a href="analytics_sort2">Transaction Date</a></th>
-                <th style="padding:5px;"><a href="analytics_sort3">Previous Value</a></th>
-                <th style="padding:5px;"><a href="analytics_sort4">New Value</a></th>
-                <th style="padding:5px;"><a href="analytics_sort5">Changes Made</a></th>
+                <th style="padding:5px;">ID</th>
+                <th style="padding:5px;">Name</th>
+                <th style="padding:5px;">Transaction Date</th>
+                <th style="padding:5px;">Previous Value</th>
+                <th style="padding:5px;">New Value</th>
+                <th style="padding:5px;">Changes Made</th>
             </tr>
             {% for row in g.analytics: %}
             <tr>
