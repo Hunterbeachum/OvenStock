@@ -38,7 +38,7 @@ app = Flask(__name__)
 app.config.from_object('config')
 
 # mail configuration (Caleb's Mailtrap)
-app.config['MAIL_SERVER']='sandbox.smtp.mailtrap.io'
+app.config['MAIL_SERVER'] = 'sandbox.smtp.mailtrap.io'
 app.config['MAIL_PORT'] = 2525
 app.config['MAIL_USERNAME'] = 'f20c99535509c0'
 app.config['MAIL_PASSWORD'] = '024ef22a1b0c03'
@@ -176,6 +176,7 @@ def transaction(item_id, quantity):
                        "<u style='color:red;'>ID = <b style='font-weight:bold'>" + str(item_id) + \
                        "<p/><p><a href='http://127.0.0.1:5000/inventory'>Click Here to see changes</p>" + \
                        "</b></u></body></html>"
+            # I need to make a change to rebase?
             print("Checkmark Reached!")
             mail.send(msg)
     return redirect(url_for('inventory'))
