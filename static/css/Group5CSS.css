@@ -44,6 +44,9 @@ table tr {
 			border-top: 1px solid black;
 			text-align: center;
 }
+table th {
+			padding: 5px;
+}
 tr:last-child {
 			border-bottom: 1px solid black;
 }
@@ -59,4 +62,7 @@ tr:nth-child(odd) {
 }
 header {
 			color: #5A5A5A;
+}
+.shortcut-menu span {
+			background-color: lightsalmon;
 }

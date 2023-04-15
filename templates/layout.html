@@ -6,7 +6,6 @@
 	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/bakeryJS.js') }}"></script>
-
 	<title>Bakery Inventory Login</title>
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
@@ -17,11 +16,13 @@
 
 			<div class="collapse navbar-collapse" id="myNavbar">
 				{% if session.get("current_user", None) != None %}
+				<span class="shortcut-menu">
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url_for('inventory') }}">Inventory</a></li>
 					<li><a href="{{ url_for('analytics') }}">Analytics</a></li>
-                    <li><a href="{{ url_for('password_reset') }}">Reset Password</a></li>
+					<li><a href="{{ url_for('password_reset') }}">Reset Password</a></li>
 				</ul>
+				</span>
                 {% endif %}
 
 				<ul class="nav navbar-nav navbar-right">

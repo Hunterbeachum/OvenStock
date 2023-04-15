@@ -37,14 +37,23 @@ for row in database.query_db("database/inventory.db", "pragma table_info('produc
 app = Flask(__name__)
 app.config.from_object('config')
 
-# mail configuration (Hunter's Mailtrap)
-app.config['MAIL_SERVER'] = 'sandbox.smtp.mailtrap.io'
+# mail configuration (Caleb's Mailtrap)
+app.config['MAIL_SERVER']='sandbox.smtp.mailtrap.io'
 app.config['MAIL_PORT'] = 2525
-app.config['MAIL_USERNAME'] = '8b744c11e3845e'
-app.config['MAIL_PASSWORD'] = 'da329f17fc0648'
+app.config['MAIL_USERNAME'] = 'f20c99535509c0'
+app.config['MAIL_PASSWORD'] = '024ef22a1b0c03'
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
+
+# mail configuration (Hunter's Mailtrap)
+# app.config['MAIL_SERVER'] = 'sandbox.smtp.mailtrap.io'
+# app.config['MAIL_PORT'] = 2525
+# app.config['MAIL_USERNAME'] = '8b744c11e3845e'
+# app.config['MAIL_PASSWORD'] = 'da329f17fc0648'
+# app.config['MAIL_USE_TLS'] = True
+# app.config['MAIL_USE_SSL'] = False
 # app.config['MAIL_SUPPRESS_SEND'] = False
+
 mail = Mail(app)
 
 # searching for all out-of-stock inventory
@@ -160,10 +169,13 @@ def transaction(item_id, quantity):
         if int(quantity) == 0:
             msg = Message('Out of Inventory Alert', sender="8b744c11e3845e",
                           recipients=['846d7a87ef-c51084@inbox.mailtrap.io', 'hsbeachum@my.waketech.edu'])
-            msg.html = f"<html><header style='color:black;font-weight:bold;'><b>Bakery Inventory System</b></header><p></p>" + \
-                       "<body style='background-color:#DDD0C8;color:red;'>" + \
-                       "You are out of inventory for an item with <u style='color:red'>ID = <b>" + str(
-                item_id) + "</b></u></body></html>"
+            msg.html = f"<html><header style='font-size:30px;color:black;font-weight:bold;text-align:center;'>" + \
+                       "<b>Bakery Inventory System</b></header>" + \
+                       "<p/><p/><p/><p/><body style='text-decoration-line:underline;text-align:center;background-color:#DDD0C8;'>" + \
+                       "You are <b style='color:red'>out of inventory</b> for an item with " + \
+                       "<u style='color:red;'>ID = <b style='font-weight:bold'>" + str(item_id) + \
+                       "<p/><p><a href='http://127.0.0.1:5000/inventory'>Click Here to see changes</p>" + \
+                       "</b></u></body></html>"
             print("Checkmark Reached!")
             mail.send(msg)
     return redirect(url_for('inventory'))
