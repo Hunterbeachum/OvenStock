@@ -176,7 +176,7 @@ def transaction(item_id, quantity):
                        "<u style='color:red;'>ID = <b style='font-weight:bold'>" + str(item_id) + \
                        "<p/><p><a href='http://127.0.0.1:5000/inventory'>Click Here to see changes</p>" + \
                        "</b></u></body></html>"
-            # Difference in main?
+            # making a difference in main.py to enable pushing again
             print("Checkmark Reached!")
             mail.send(msg)
     return redirect(url_for('inventory'))
