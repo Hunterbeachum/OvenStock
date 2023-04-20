@@ -4,6 +4,11 @@
     {{ super() }}
 
 {% if session.get("current_user", None) == 'ADMIN' %}
+
+            {% if img_data != None %}
+                <img src="data:image/jpeg;base64,{{ img_data }}" alt="img_data"  id="img slot"/>
+            {% endif %}
+
 <table>
             <tr>
                 <th>ID</th>
@@ -25,10 +30,6 @@
             {% endfor %}
 
 </table>
-
-            {% if encoded != None %}
-                <img src="data:image/jpeg;base64,{{ img_data }}" alt="img_data"  id="img slot"/>
-            {% endif %}
 
 {% endif %}
 {% endblock %}

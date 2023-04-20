@@ -27,6 +27,7 @@ def get_db(selection):
     conn.row_factory = sqlite3.Row
     return conn
 
+
 def update_product(product_name, quantity):
     print('\n\nupdate product\n\n')
 
@@ -36,7 +37,7 @@ def update_product(product_name, quantity):
     for item in query_db("database/inventory.db", "SELECT * FROM product WHERE name = ?;", [product_name]):
         product = item 
 
-    query_db("database/inventory.db", "INSERT INTO update_history(id, date_changed, prev, changed) VALUES (?, ?, ?, ?)", [product['id'], '03-07-2023', product['quantity'], quantity])
+    query_db("database/inventory.db", "INSERT INTO update_history(id, date_changed, prev, changed) VALUES (?, ?, ?, ?)", [product['id'], '2023-04-20 16:57:34.015773', product['quantity'], quantity])
     #c.execute("UPDATE product SET quantity = ? WHERE id = ?", [quantity, product['id']])
 
     return
