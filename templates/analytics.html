@@ -9,7 +9,7 @@
                 <img src="data:image/jpeg;base64,{{ img_data }}" alt="img_data"  id="img slot" style="width:800px;height:auto;"/>
             {% endif %}
 
-<table style="margin:auto; text-align:center; max-width: 500px;">
+<table style="margin:auto; text-align:center; max-width: 5000px;">
             <tr>
                 <th>ID</th>
                 <th>Name</th>
@@ -21,7 +21,7 @@
             <tr>
                 {% for item in row %}
                     {% if item == row[1] %}
-                        <td><a href="/analytics/graph_{{ row[0] }}">{{ item }}</a></td>
+                        <td><a href="/analytics/graph_{{ row[0] }}" style="white-space:nowrap;margin:10px;"> {{ item }} </a></td>
                     {% else %}
                         <td>{{ item }}</td>
                     {% endif %}

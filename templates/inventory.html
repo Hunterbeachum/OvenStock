@@ -13,18 +13,20 @@
 
 </div>
 
-<table style="margin:auto; text-align:center; max-width: 500px;">
-    <tr style="float:inherit;">
+<table style="margin:auto;text-align:center;">
+    <tr style="table-layout:auto;white-space:nowrap;margin:100px;" >
         <th><a href="/inventory_sort0">ID</a></th>
         <th><a href="/inventory_sort1">Name</a></th>
         <th><a href="/inventory_sort2">Vendor</a></th>
         <th><a href="/inventory_sort3">Quantity (per item/gram)</a></th>
-        <th></th>
+        {% if session.get("current_user", None) == 'ADMIN' %}
+        <th>Admin Tools</th>
+        {% endif %}
     </tr>
     {% for row in g.inventory: %}
     <tr>
         {% for item in row %}
-            <td>{{ item }}</td>
+            <td style=""> {{ item }} </td>
         {% endfor %}
         {% if session.get("current_user", None) == 'ADMIN' %}
             <form action="/inventory/delete_{{row[0]}}" method="get" class="navbar-form navbar-right">
