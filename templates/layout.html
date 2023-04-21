@@ -10,22 +10,22 @@
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid" style="margin:auto; text-align:center; max-width: 500px;">
 			<div class="navbar-header" style="margin:auto; text-align:center; max-width: 500px;">
-				<a class="navbar-brand" href="/">Bakery Inventory System Homepage</a>
+				<a class="navbar-brand" href="/" style="font-weight:bold;font-size:30px">Bakery Inventory System Homepage</a>
 
 			</div>
 
 			<div class="collapse navbar-collapse" id="myNavbar" style="margin:auto; text-align:center; max-width: 500px;">
 				{% if session.get("current_user", None) != None %}
 				<span class="shortcut-menu">
-                <ul class="nav navbar-nav" style="margin:auto; text-align:center; max-width: 500px;">
-                    <li><a href="{{ url_for('inventory') }}">Inventory</a></li>
-					<li><a href="{{ url_for('analytics') }}">Analytics</a></li>
-					<li><a href="{{ url_for('password_reset') }}">Reset Password</a></li>
+                <ul class="nav navbar-nav" style="margin:auto;text-align:center;max-width:500px;">
+                    <li style="margin:auto;text-align:center;max-width:150px;"><a href="{{ url_for('inventory') }}">Inventory</a></li>
+					<li style="margin:auto;text-align:center;max-width:150px;"><a href="{{ url_for('analytics') }}">Analytics</a></li>
+					<li style="margin:auto;text-align:center;max-width:150px;"><a href="{{ url_for('password_reset') }}">Reset Password</a></li>
 				</ul>
 				</span>
                 {% endif %}
 
-				<ul class="nav navbar-nav navbar-right" style="margin:auto; text-align:center; max-width: 500px;">
+				<ul class="nav navbar-nav navbar-right" style="margin:auto; text-align:center; max-width: 650px;">
 					{% if session.get("current_user", None) == None %}
 					<form action="/login" method="post" class="navbar-form navbar-right">
 						<h1 style="text-decoration: underline;">Login</h1>
@@ -40,8 +40,9 @@
 
 						<a href="{{ url_for('password_reset') }}">Forgot Password?</a>
 						<a href="{{ url_for('add_user') }}">Create User?</a>
-						<p></p>
+						<p></p><p></p>
 						<button type="submit" class="btn btn-success">Log In</button>
+						<p></p>
 					</form>
 					{% else %}
 
