@@ -8,16 +8,16 @@
 	<script src="{{ url_for('static', filename='js/bakeryJS.js') }}"></script>
 	<title>Bakery Inventory Login</title>
 	<nav class="navbar navbar-inverse">
-		<div class="container-fluid">
-			<div class="navbar-header">
+		<div class="container-fluid" style="margin:auto; text-align:center; max-width: 500px;">
+			<div class="navbar-header" style="margin:auto; text-align:center; max-width: 500px;">
 				<a class="navbar-brand" href="/">Bakery Inventory System Homepage</a>
 
 			</div>
 
-			<div class="collapse navbar-collapse" id="myNavbar">
+			<div class="collapse navbar-collapse" id="myNavbar" style="margin:auto; text-align:center; max-width: 500px;">
 				{% if session.get("current_user", None) != None %}
 				<span class="shortcut-menu">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" style="margin:auto; text-align:center; max-width: 500px;">
                     <li><a href="{{ url_for('inventory') }}">Inventory</a></li>
 					<li><a href="{{ url_for('analytics') }}">Analytics</a></li>
 					<li><a href="{{ url_for('password_reset') }}">Reset Password</a></li>
@@ -25,7 +25,7 @@
 				</span>
                 {% endif %}
 
-				<ul class="nav navbar-nav navbar-right">
+				<ul class="nav navbar-nav navbar-right" style="margin:auto; text-align:center; max-width: 500px;">
 					{% if session.get("current_user", None) == None %}
 					<form action="/login" method="post" class="navbar-form navbar-right">
 						<h1 style="text-decoration: underline;">Login</h1>
@@ -48,15 +48,15 @@
 					{% endif %}
 				</ul>
 			</div>
-			<a><b>Logged in as: <u>{{ session.get("current_user") }}</u> - </b></a>
-   			<a href="{{ url_for('logout') }}"><b><u>Logout</u></b></a>
+			<a style="margin:auto; text-align:center; max-width: 500px;"><b>Logged in as: <u>{{ session.get("current_user") }}</u> - </b></a>
+   			<a href="{{ url_for('logout') }}" style="margin:auto; text-align:center; max-width: 500px;"><b><u>Logout</u></b></a>
 
 		</div>
     </nav>
 
     {% with messages = get_flashed_messages() %}
       	{% if messages %}
-        	<ul class=flashes>
+        	<ul style="margin:auto; text-align:center; max-width: 500px;" class=flashes>
 			{% for message in messages %}
         		<li style="color:red;">{{ message }}</li>
 			{% endfor %}
@@ -65,7 +65,7 @@
     {% endwith %}
 
 
-    <div class="under-h1-container">
+    <div class="under-h1-container" style="margin:auto; text-align:center;">
         <h1>{% block page_title %}{% endblock %}</h1>
 		<img alt="Shelf underneath the heading" src="{{ url_for('static', filename='css/shelfing.jpg') }}" style="position: relative;opacity:60%"></img>
         <p>{% block body %}{% endblock %}</p>
