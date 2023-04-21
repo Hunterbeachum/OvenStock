@@ -18,9 +18,9 @@
 				{% if session.get("current_user", None) != None %}
 				<span class="shortcut-menu">
                 <ul class="nav navbar-nav" style="margin:auto; text-align:center; max-width: 500px;">
-                    <li><a href="{{ url_for('inventory') }}">Inventory</a></li>
-					<li><a href="{{ url_for('analytics') }}">Analytics</a></li>
-					<li><a href="{{ url_for('password_reset') }}">Reset Password</a></li>
+                    <li style="margin:auto; text-align:left; max-width: 140px;"><a href="{{ url_for('inventory') }}">Inventory</a></li>
+					<li style="margin:auto; text-align:left; max-width: 140px;"><a href="{{ url_for('analytics') }}">Analytics</a></li>
+					<li style="margin:auto; text-align:left; max-width: 140px;"><a href="{{ url_for('password_reset') }}">Reset Password</a></li>
 				</ul>
 				</span>
                 {% endif %}
