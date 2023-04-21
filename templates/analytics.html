@@ -6,7 +6,7 @@
 {% if session.get("current_user", None) == 'ADMIN' %}
 
             {% if img_data != None %}
-                <img src="data:image/jpeg;base64,{{ img_data }}" alt="img_data"  id="img slot"/>
+                <img src="data:image/jpeg;base64,{{ img_data }}" alt="img_data"  id="img slot" style="width:800px;height:auto;"/>
             {% endif %}
 
 <table style="margin:auto; text-align:center; max-width: 500px;">
