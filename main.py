@@ -156,8 +156,8 @@ def transaction(item_id, quantity):
                        "<p/><p><a href='http://127.0.0.1:5000/inventory'>Click Here to see changes</p>" + \
                        "</b></u></body></html>"
             # making a difference in main.py to enable pushing again
-            print("Checkmark Reached!")
             mail.send(msg)
+            print("Checkmark Reached! Email has been sent!")
     return redirect(url_for('inventory'))
 
 
