@@ -1,87 +1,97 @@
 <!DOCTYPE html>
 <html lang="eng">
-	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/Group5CSS.css') }}">
-	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-	<script src="{{ url_for('static', filename='js/bakeryJS.js') }}"></script>
-	<title>Bakery Inventory Login</title>
-	<nav class="navbar navbar-inverse">
-		<div class="container-fluid" style="margin:auto; text-align:center; max-width: 500px;">
-			<div class="navbar-header" style="margin:auto; text-align:center; max-width: 500px;">
-				<a class="navbar-brand" href="/">Bakery Inventory System Homepage</a>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/Group5CSS.css') }}">
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bakeryJS.js') }}"></script>
+<title>Bakery Inventory Login</title>
 
-			</div>
-
-			<div class="collapse navbar-collapse" id="myNavbar" style="margin:auto; text-align:center; max-width: 500px;">
-				{% if session.get("current_user", None) != None %}
-				<span class="shortcut-menu">
-                <ul class="nav navbar-nav" style="margin:auto; text-align:center; max-width: 500px;">
-                    <li style="margin:auto; text-align:left; max-width: 140px;"><a href="{{ url_for('inventory') }}">Inventory</a></li>
-					<li style="margin:auto; text-align:left; max-width: 140px;"><a href="{{ url_for('analytics') }}">Analytics</a></li>
-					<li style="margin:auto; text-align:left; max-width: 140px;"><a href="{{ url_for('password_reset') }}">Reset Password</a></li>
-				</ul>
-				</span>
-                {% endif %}
-
-				<ul class="nav navbar-nav navbar-right" style="margin:auto; text-align:center; max-width: 500px;">
-					{% if session.get("current_user", None) == None %}
-					<form action="/login" method="post" class="navbar-form navbar-right">
-						<h1 style="text-decoration: underline;">Login</h1>
-						<div class="form-group">
-                            <label for="user"></label><input type="text" name="id" id = "user" placeholder="User Name" class="form-control" required>
-						</div>
-						<p></p>
-						<div class="form-group">
-							<label for="pass"></label><input type="password" name="pw" id = "pass" placeholder="Password" class="form-control">
-						<p></p>
-						</div>
-
-						<a href="{{ url_for('password_reset') }}">Forgot Password?</a>
-						<a href="{{ url_for('add_user') }}">Create User?</a>
-						<p></p>
-						<button type="submit" class="btn btn-success">Log In</button>
-					</form>
-					{% else %}
-
-					{% endif %}
-				</ul>
-			</div>
-			<a style="margin:auto; text-align:center; max-width: 500px;"><b>Logged in as: <u>{{ session.get("current_user") }}</u> - </b></a>
-   			<a href="{{ url_for('logout') }}" style="margin:auto; text-align:center; max-width: 500px;"><b><u>Logout</u></b></a>
-
-		</div>
-    </nav>
-
-    {% with messages = get_flashed_messages() %}
-      	{% if messages %}
-        	<ul style="margin:auto; text-align:center; max-width: 500px;" class=flashes>
-			{% for message in messages %}
-        		<li style="color:red;">{{ message }}</li>
-			{% endfor %}
-        	</ul>
-		{% endif %}
-    {% endwith %}
-
-
-    <div class="under-h1-container" style="margin:auto; text-align:center;">
-        <h1>{% block page_title %}{% endblock %}</h1>
-		<img alt="Shelf underneath the heading" src="{{ url_for('static', filename='css/shelfing.jpg') }}" style="position: relative;opacity:60%"></img>
-        <p>{% block body %}{% endblock %}</p>
-    </div>
-
-
-    <div class='container'>
-        <hr>
-            Developed by <a title="Github Link" href='https://github.com/Hunterbeachum/bakery-inventory'>CSC 289 Group 5 </a>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid" style="margin:auto; text-align:center; max-width: 500px;">
+        <div class="navbar-header" style="margin:auto; text-align:center; max-width: 500px;">
+            <a class="navbar-brand" href="/" style="text-align:center; max-width: 500px;">Bakery Inventory System
+                Homepage</a>
+        </div>
+        <p></p>
+        <div class="collapse navbar-collapse" id="myNavbar"
+             style="margin:auto; text-align:center; max-width: 500px;">
+            {% if session.get("current_user", None) != None %}
+            <span class="shortcut-menu">
+            	    <ul class="nav navbar-nav" style="margin:auto; text-align:center; max-width: 500px;">
+                	    <li style="margin:auto; text-align:left; max-width: 140px;"><a
+                                href="{{ url_for('inventory') }}">Inventory</a></li>
+						<li style="margin:auto; text-align:left; max-width: 140px;"><a
+                                href="{{ url_for('analytics') }}">Analytics</a></li>
+						<li style="margin:auto; text-align:left; max-width: 140px;"><a
+                                href="{{ url_for('password_reset') }}">Reset Password</a></li>
+					</ul>
+			</span>
             <p></p>
-            <a href="https://flask.palletsprojects.com/en/2.2.x/">
-                <img src="{{ url_for('static', filename='css/flask-powered.png') }}" alt="Flask Powered" width="250"
-                                height="150" style="border:0;display:inline-flex;float:right;" title="Flask powered">
-			</a>
+            {% endif %}
+            <ul class="nav navbar-nav navbar-right" style="margin:auto; text-align:center; max-width: 500px;">
+                {% if session.get("current_user", None) == None %}
+                <form action="/login" method="post" class="navbar-form navbar-right">
+                    <h1 style="text-decoration: underline;">Login</h1>
+                    <div class="form-group">
+                        <label for="user"></label><input type="text" name="id" id="user" placeholder="User Name"
+                                                         class="form-control" required>
+                    </div>
+                    <p></p>
+                    <div class="form-group">
+                        <label for="pass"></label><input type="password" name="pw" id="pass"
+                                                         placeholder="Password" class="form-control">
+                        <p></p>
+                    </div>
+                    <a href="{{ url_for('password_reset') }}">Forgot Password?</a>
+                    <a href="{{ url_for('add_user') }}">Create User?</a>
+                    <p></p>
+                    <button type="submit" class="btn btn-success">Log In</button>
+                </form>
+                {% else %}
+
+                {% endif %}
+            </ul>
+        </div>
+        <a style="margin:auto; text-align:center; max-width: 500px;"><b>Logged in as: <u>{{
+            session.get("current_user") }}</u> - </b></a>
+        <a href="{{ url_for('logout') }}"
+           style="margin:auto; text-align:center; max-width: 500px;"><b><u>Logout</u></b></a>
     </div>
-    <script src="{{ url_for('static', filename='js/bakeryJS.js') }}"></script>
+    </div>
+</nav>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul style="margin:auto; text-align:center; max-width: 500px;" class=flashes>
+    {% for message in messages %}
+    <li style="color:red;">{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+
+<div class="under-h1-container" style="margin:auto; text-align:center;">
+    <h1>{% block page_title %}{% endblock %}</h1>
+    <img alt="Shelf underneath the heading" src="{{ url_for('static', filename='css/shelfing.jpg') }}"
+         style="position: relative;opacity:60%"></img>
+    <p>{% block body %}{% endblock %}</p>
+</div>
+
+
+<div class='container'>
+    <hr>
+    Developed by <a title="Github Link" href='https://github.com/Hunterbeachum/bakery-inventory'>CSC 289 Group
+    5 </a>
+    <p></p>
+    <a href="https://flask.palletsprojects.com/en/2.2.x/">
+        <img src="{{ url_for('static', filename='css/flask-powered.png') }}" alt="Flask Powered" width="250"
+             height="150" style="border:0;display:inline-flex;float:right;" title="Flask powered">
+    </a>
+</div>
+<script src="{{ url_for('static', filename='js/bakeryJS.js') }}"></script>
 
 
 </html>

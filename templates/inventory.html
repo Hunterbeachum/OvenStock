@@ -3,7 +3,7 @@
 {% block body %}
     {{ super() }}
     <link rel="stylesheet" type="text/css" href="Group5CSS.css">
-
+<h2>Inventory Menu</h2>
 <div style="opacity:0;height:8px" class="alert alert-{{ category }}" id="message_overlay">
 	{% for row in g.inventory: %}
         {% if row[3] == 0: %}
@@ -20,7 +20,7 @@
         <th><a href="/inventory_sort2">Vendor</a></th>
         <th><a href="/inventory_sort3">Quantity (per item/gram)</a></th>
         {% if session.get("current_user", None) == 'ADMIN' %}
-        <th>Admin Tools</th>
+        <th style="color:#9C1A1C">Admin Tools</th>
         {% endif %}
     </tr>
     {% for row in g.inventory: %}
