@@ -29,6 +29,10 @@
 					</ul>
 			</span>
             <p></p>
+            <a style="margin:auto; text-align:center; max-width: 500px;"><b>Logged in as: <u>{{
+            session.get("current_user") }}</u> - </b></a>
+            <a href="{{ url_for('logout') }}"
+           style="margin:auto; text-align:center; max-width: 500px;"><b><u>Logout</u></b></a>
             {% endif %}
             <ul class="nav navbar-nav navbar-right" style="margin:auto; text-align:center; max-width: 500px;">
                 {% if session.get("current_user", None) == None %}
@@ -54,10 +58,6 @@
                 {% endif %}
             </ul>
         </div>
-        <a style="margin:auto; text-align:center; max-width: 500px;"><b>Logged in as: <u>{{
-            session.get("current_user") }}</u> - </b></a>
-        <a href="{{ url_for('logout') }}"
-           style="margin:auto; text-align:center; max-width: 500px;"><b><u>Logout</u></b></a>
     </div>
     </div>
 </nav>
@@ -66,7 +66,7 @@
 {% if messages %}
 <ul style="margin:auto; text-align:center; max-width: 500px;" class=flashes>
     {% for message in messages %}
-    <li style="color:red;">{{ message }}</li>
+    <p style="font-size:20px;"><b>{{ message }}</b></p>
     {% endfor %}
 </ul>
 {% endif %}

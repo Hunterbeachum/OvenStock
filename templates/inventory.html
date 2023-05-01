@@ -37,7 +37,7 @@
     {% endfor %}
 </table>
 <p></p>
-<button id="showOver" style="opacity:100%;background-color:white;" onclick="open_overlay()">See Out of Stock</button>
+<button id="showOver" style="opacity:100%;background-color:white;margin-left: 100px;" onclick="open_overlay()">See Out of Stock</button>
 <button id="hideOver" style="opacity:0%;background-color:red;color:white;" onclick="close_overlay()">Close Alerts</button>
 {% if session.get("current_user", None) == 'ADMIN' %}
     <form action="/inventory" method="post" class="navbar-form navbar-right">

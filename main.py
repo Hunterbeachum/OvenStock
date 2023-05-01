@@ -82,6 +82,8 @@ def add_user():
             # Add username, password, and email to database
             database.query_db("database/users.db", f"INSERT INTO users (username, password) VALUES(?, ?)",
                               [new_user, new_pass])
+            success_message = "User created!"
+            flash(success_message)
     return render_template("add_user.html")
 
 
@@ -153,7 +155,7 @@ def transaction(item_id, quantity):
                        "<p/><p/><p/><p/><body style='text-decoration-line:underline;text-align:center;background-color:#DDD0C8;'>" + \
                        "You are <b style='color:red'>out of inventory</b> for an item: " + \
                        f"<u style='color:red;'>{item_name}<b style='font-weight:bold'>" \
-                       "<p/><p><a href='http://127.0.0.1:5000/inventory'>Click Here to see changes</p>" + \
+                       "<p/><p><a href='localhost:5000/inventory'>Click Here to see changes</p>" + \
                        "</b></u></body></html>"
             mail.send(msg)
             print("Checkmark Reached! Email has been sent!")
@@ -189,9 +191,13 @@ def create_analytics_graphic(item_id):
         g.analytics = list_analytics()
     fig = Figure(figsize=(5, 4))
     ax = fig.subplots()
-    item_history, x, y = [], [], []
+    item_history, x, y = [], ['Start'], []
+    k = 0
     for list_item in list_analytics():
         if list_item[0] == int(item_id):
+            if k == 0:
+                y.append(list_item[3])
+                k += 1
             item_history.append(list_item)
             x.append(list_item[2])
             y.append(list_item[4])
